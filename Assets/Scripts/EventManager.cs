@@ -4,7 +4,9 @@ using UnityEngine.Events;
 using Utility;
 
 public class Events {
-    public const string EVENT = "";
+    public const string COMBINE_ITEM = "COMBINE_ITEM";
+    public const string PLAYER_MOVE = "PLAYER_MOVE";
+    public const string ITEM_ACTION = "ITEM_PICK_UP";
 }
 
 public class BaseEvent : UnityEvent<BaseMessage> {
@@ -13,20 +15,26 @@ public class BaseEvent : UnityEvent<BaseMessage> {
 public class BaseMessage {
 }
 
-public class StringMessage : BaseMessage {
-    public string value;
+public class MovementMessage: BaseMessage {
 
-    public StringMessage(string value) {
-        this.value = value;
+    public float targetLocation;
+    public float distance;
+
+    public MovementMessage(float targetLocation, float distance) {
+        this.targetLocation = targetLocation;
+        this.distance = distance;
     }
+
 }
 
-public class BoolMessage : BaseMessage {
-    public bool value;
+public class ItemActionMessage: BaseMessage {
 
-    public BoolMessage(bool value) {
-        this.value = value;
+    public Item item;
+
+    public ItemActionMessage(Item item) {
+        this.item = item;
     }
+
 }
 
 public class EventManager : MonoBehaviour {
